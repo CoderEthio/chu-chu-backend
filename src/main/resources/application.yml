@@ -1,0 +1,48 @@
+server:
+    tomcat:
+        accesslog:
+            enabled: true
+spring:
+    profiles:
+        active:
+            - dev
+    data:
+        web:
+            pageable:
+                default-page-size: 10
+                max-page-size: 100
+    datasource:
+        generate-unique-name: false
+    h2:
+        console:
+            enabled: true
+            path: /h2-console
+    jpa:
+        properties:
+            javax:
+                persistence:
+                    validation:
+                        mode: none
+---
+spring:
+    profiles: prod
+    datasource:
+      url: jdbc:h2:./chu-prod
+    jpa:
+      hibernate:
+          ddl-auto: update
+    h2:
+      console:
+          enabled: false
+chuna:
+    upload-path: uploads-prod
+---
+spring:
+  profiles: dev
+  datasource:
+      url: jdbc:h2:mem:chu-dev
+chuna:
+    upload-path: uploads-dev
+
+
+
